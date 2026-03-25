@@ -4,29 +4,31 @@ public class Stock extends Instrument {
 
     public Stock(String symbol, String name, double currentPrice, double marketCap, String sector) {
         super(symbol, name, currentPrice);
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        this.marketCap = marketCap;
+        this.sector = sector;
     }
 
     @Override
     public double riskScore() {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        if (this.marketCap < 1e9) {
+            return 7.5;
+        } else if (this.marketCap < 10e9) {
+            return 5.0;
+        } else {
+            return 3.0;
+        }
     }
 
     @Override
     public String assetClass() {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        return "EQUITY";
     }
-    
+
     public double getMarketCap() {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        return this.marketCap;
     }
 
     public String getSector() {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        return this.sector;
     }
 }
