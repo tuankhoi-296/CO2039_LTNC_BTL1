@@ -4,27 +4,55 @@ public class RiskAnalyzer<T extends Instrument> {
     private final List<T> instruments = new ArrayList<>();
 
     public void add(T instrument) {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        if (instrument != null) {
+            this.instruments.add(instrument);
+        }
     }
 
     public double averageRisk() {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        if (this.instruments.isEmpty()) {
+            return 0.0;
+        }
+        double sum = 0.0;
+        for (T inst : this.instruments) {
+            sum += inst.riskScore();
+        }
+        return sum / this.instruments.size();
     }
 
     public T highestRisk() {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        if (this.instruments.isEmpty()) {
+            return null;
+        }
+        T highest = this.instruments.get(0);
+        for (T inst : this.instruments) {
+            if (inst.riskScore() > highest.riskScore()) {
+                highest = inst;
+            }
+        }
+        return highest;
     }
 
     public T lowestRisk() {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        if (this.instruments.isEmpty()) {
+            return null;
+        }
+        T lowest = this.instruments.get(0);
+        for (T inst : this.instruments) {
+            if (inst.riskScore() < lowest.riskScore()) {
+                lowest = inst;
+            }
+        }
+        return lowest;
     }
 
     public List<T> getAboveRiskThreshold(double threshold) {
-        // TODO
-        throw new UnsupportedOperationException("TODO");
+        List<T> result = new ArrayList<>();
+        for (T inst : this.instruments) {
+            if (inst.riskScore() > threshold) {
+                result.add(inst);
+            }
+        }
+        return result;
     }
 }
